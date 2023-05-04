@@ -77,12 +77,12 @@ fun CredentialsTextField(
     block: () -> Unit,
 ) {
 
-    var text by remember { mutableStateOf("Hello World") }
+    var text by remember { mutableStateOf(text) }
 
     TextField(
-        value = text,
+        value = "",
         onValueChange = { text = it },
-        label = { Text("Label") },
+        label = { Text(text) },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Gray
         )
@@ -97,6 +97,7 @@ private fun App() {
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             //Coluna Geochat e Seta
