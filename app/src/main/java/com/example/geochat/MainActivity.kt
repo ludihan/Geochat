@@ -86,7 +86,7 @@ fun CredentialsTextField(
 
     var text by remember { mutableStateOf(text) }
 
-    TextField(value = "AAA",
+    TextField(value = "",
         modifier = Modifier.size(240.dp, 30.dp),
         shape = RectangleShape,
         onValueChange = { text = it },
@@ -118,7 +118,8 @@ private fun App() {
 
             //Coluna Geochat e Seta
             Column(
-                verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.Start
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.Start
             ) {
                 Text(
                     text = "Geochat",
