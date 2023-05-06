@@ -65,38 +65,34 @@ fun LoginButton(
         modifier = Modifier.size(180.dp, 60.dp)
     ) {
         Text(
-            text = text,
-            fontSize = 20.sp,
-            color = Color.Black,
-            fontFamily = FontFamily(Font(R.font.jetbrainsmonoregular, FontWeight.Normal),
+            text = text, fontSize = 20.sp, color = Color.Black, fontFamily = FontFamily(
+                Font(R.font.jetbrainsmonoregular, FontWeight.Normal),
             )
         )
     }
 }
-
+/*
 @Composable
 fun CredentialsTextField(
     textLabel: String,
-    block: () -> Unit,
+    textValue: String,
 ) {
-    var text by remember { mutableStateOf("") }
-    TextField(
-        value = text,
-        shape = RectangleShape,
-        onValueChange = { newText ->
-            text = newText
-        },
-        label = {
+    Column() {
+        TextField(value = textValue, shape = RectangleShape, onValueChange = {
+            textValue = it
+        }, label = {
             Text(text = textLabel)
-        },
-        colors = TextFieldDefaults.textFieldColors(
+        }, colors = TextFieldDefaults.textFieldColors(
             containerColor = Gray
         )
-    )
+        )
+    }
 }
-
+*/
 @Composable
 private fun App() {
+    var nome by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
     Surface(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
     ) {
@@ -107,8 +103,7 @@ private fun App() {
 
             //Coluna Geochat e Seta
             Column(
-                verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.Start
+                verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.Start
             ) {
                 Text(
                     text = "Geochat",
@@ -119,20 +114,30 @@ private fun App() {
             }
 
             //Coluna Usuário e Senha
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                //verticalArrangement = Arrangement.SpaceEvenly,
-            ) {
-                CredentialsTextField(textLabel = "Nome") {
-                    Log.d(TAG, "App: Clicou em Login!")
-                }
-                CredentialsTextField(textLabel = "Senha") {
-                    Log.d(TAG, "App: Clicou em Login!")
-                }
+            Column() {
+                TextField(value = nome, shape = RectangleShape, onValueChange = { newText ->
+                    nome = newText
+                }, label = {
+                    Text(text = "Nome")
+                }, colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Gray
+                )
+                )
+                TextField(value = senha, shape = RectangleShape, onValueChange = { newText ->
+                    senha = newText
+                }, label = {
+                    Text(text = "Senha")
+                }, colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Gray
+                )
+                )
             }
+
             //Login e Esqueci a senha
             LoginButton(text = "Login", buttonColors = GrayButtonColors()) {
                 Log.d(TAG, "App: Clicou em Login!")
+                Log.d(TAG, nome)
+                Log.d(TAG, senha)
             }
             Text(text = "Esqueci a senha",
                 color = Color.Blue,
