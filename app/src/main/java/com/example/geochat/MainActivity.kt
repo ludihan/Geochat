@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,9 +39,6 @@ import androidx.compose.ui.unit.sp
 import com.example.geochat.ui.theme.GeochatTheme
 import com.example.geochat.ui.theme.Gray
 import com.example.geochat.ui.theme.GrayButtonColors
-
-
-val fonteJBMR = FontFamily(Font(R.font.jetbrainsmonoregular, FontWeight.Normal))
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,38 +62,37 @@ fun LoginButton(
         onClick = block,
         shape = RoundedCornerShape(137.dp),
         colors = buttonColors,
-        modifier = Modifier.size(100.dp, 40.dp)
+        modifier = Modifier.size(180.dp, 60.dp)
     ) {
-        Text(text = text, color = Color.Black, fontFamily = fonteJBMR)
+        Text(
+            text = text,
+            fontSize = 20.sp,
+            color = Color.Black,
+            fontFamily = FontFamily(Font(R.font.jetbrainsmonoregular, FontWeight.Normal),
+            )
+        )
     }
 }
 
 @Composable
 fun CredentialsTextField(
-    text: String,
+    textLabel: String,
     block: () -> Unit,
 ) {
-
-    var text by remember { mutableStateOf(text) }
-
-    TextField(value = "",
-        modifier = Modifier.size(240.dp, 30.dp),
+    var text by remember { mutableStateOf("") }
+    TextField(
+        value = text,
         shape = RectangleShape,
-        onValueChange = { text = it },
+        onValueChange = { newText ->
+            text = newText
+        },
         label = {
-            Column(verticalArrangement = Arrangement.Top) {
-                Text(
-                    text = text,
-                    fontSize = 12.sp,
-                    fontStyle = FontStyle.Italic
-                )
-            }
+            Text(text = textLabel)
         },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Gray
         )
     )
-
 }
 
 @Composable
@@ -118,21 +113,21 @@ private fun App() {
                 Text(
                     text = "Geochat",
                     fontSize = 40.sp,
-                    fontFamily = fonteJBMR,
-                    fontWeight = FontWeight.Normal
+                    fontFamily = FontFamily(Font(R.font.jetbrainsmonoregular, FontWeight.Normal)),
+                    fontWeight = FontWeight.Normal,
                 )
             }
 
             //Coluna Usuário e Senha
             Column(
-                //verticalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.size(240.dp, 70.dp)
+                horizontalAlignment = Alignment.CenterHorizontally,
+                //verticalArrangement = Arrangement.SpaceEvenly,
             ) {
-                CredentialsTextField(text = "Nome") {
-                    /*TODO*/
+                CredentialsTextField(textLabel = "Nome") {
+                    Log.d(TAG, "App: Clicou em Login!")
                 }
-                CredentialsTextField(text = "Senha") {
-
+                CredentialsTextField(textLabel = "Senha") {
+                    Log.d(TAG, "App: Clicou em Login!")
                 }
             }
             //Login e Esqueci a senha
