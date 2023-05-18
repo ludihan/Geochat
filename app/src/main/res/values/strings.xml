@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Geochat</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_config_menu">ConfigMenu</string>
+    <string name="title_activity_chat_menu">ChatMenu</string>
+    <string name="title_activity_main_nav_bar">MainNavBar</string>
+    <string name="title_activity_bottom_nav_graph">com.example.geochat.BottomNavGraph</string>
+    <string name="title_activity_main_screen">MainScreen</string>
 </resources>

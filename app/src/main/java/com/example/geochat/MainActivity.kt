@@ -1,8 +1,8 @@
 package com.example.geochat
 
-import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -71,6 +73,7 @@ fun LoginButton(
         )
     }
 }
+
 /*
 @Composable
 fun CredentialsTextField(
@@ -88,9 +91,15 @@ fun CredentialsTextField(
         )
     }
 }
-*/
+
+
+ */
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App() {
+    val context = LocalContext.current
+
     var nome by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
     Surface(
@@ -114,7 +123,7 @@ private fun App() {
             }
 
             //Coluna Usuário e Senha
-            Column() {
+            Column {
                 TextField(value = nome, shape = RectangleShape, onValueChange = { newText ->
                     nome = newText
                 }, label = {
@@ -135,9 +144,11 @@ private fun App() {
 
             //Login e Esqueci a senha
             LoginButton(text = "Login", buttonColors = GrayButtonColors()) {
-                Log.d(TAG, "App: Clicou em Login!")
-                Log.d(TAG, nome)
-                Log.d(TAG, senha)
+                if (nome == "admin" && senha == "admin") {
+                    context.startActivity(Intent(context, MainScreen::class.java))
+                } else {
+                    Toast.makeText(context, "Login errado!!", Toast.LENGTH_LONG).show()
+                }
             }
             Text(text = "Esqueci a senha",
                 color = Color.Blue,
