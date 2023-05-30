@@ -14,7 +14,7 @@ fun MapScreen() {
     Image(
         modifier = Modifier.size(850.dp),
         contentScale = ContentScale.FillBounds,
-        painter = painterResource(id = R.drawable.image3,),
+        painter = painterResource(id = R.drawable.image3),
         contentDescription = null
     )
 }
