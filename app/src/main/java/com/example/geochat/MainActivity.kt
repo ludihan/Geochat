@@ -124,19 +124,21 @@ private fun App() {
 
             //Coluna Usuário e Senha
             Column {
-                TextField(value = nome, shape = RectangleShape, onValueChange = { newText ->
+                TextField(value = nome, shape = RectangleShape, singleLine = true, onValueChange = { newText ->
                     nome = newText
                 }, label = {
-                    Text(text = "Nome")
+                    Text(text = "Nome", color = MaterialTheme.colorScheme.background)
                 }, colors = TextFieldDefaults.textFieldColors(
+                    textColor = Color.Black,
                     containerColor = Gray
                 )
                 )
-                TextField(value = senha, shape = RectangleShape, onValueChange = { newText ->
+                TextField(value = senha, shape = RectangleShape, singleLine = true, onValueChange = { newText ->
                     senha = newText
                 }, label = {
-                    Text(text = "Senha")
+                    Text(text = "Senha", color = MaterialTheme.colorScheme.background)
                 }, colors = TextFieldDefaults.textFieldColors(
+                    textColor = Color.Black,
                     containerColor = Gray
                 )
                 )

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Geochat"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyClYgGT-mTTPftE1UPRJCPX1zL6fsXCNnI" />
         <activity
             android:name=".MainScreen"
             android:exported="false"
