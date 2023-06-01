@@ -23,7 +23,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Composable
 fun MapScreen() {
 
-    val brazil = LatLng(1.35, 103.87)
+    val brazil = LatLng(-3.74, -38.4)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(brazil, 10f)
     }
