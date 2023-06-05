@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +36,8 @@ import java.util.Locale
 val message = mutableStateOf("")
 
 private val BotChatBubbleShape = RoundedCornerShape(0.dp, 8.dp, 8.dp, 8.dp)
-private val AuthorChatBubbleShape = RoundedCornerShape( 8.dp, 0.dp, 8.dp, 8.dp)
+private val AuthorChatBubbleShape = RoundedCornerShape(8.dp, 0.dp, 8.dp, 8.dp)
+
 @Composable
 fun TopBarSection(
     username: String,
@@ -46,8 +48,10 @@ fun TopBarSection(
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp),
-        backgroundColor = Color(0xFFFAFAFA),
-        elevation = 4.dp
+        //backgroundColor = Color(0xFFFAFAFA),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        )
     ) {
         Row(
             modifier = Modifier
@@ -66,9 +70,9 @@ fun TopBarSection(
             Spacer(modifier = Modifier.width(8.dp))
 
             Column {
-                Text(text= username, fontWeight = FontWeight.SemiBold)
+                Text(text = username, fontWeight = FontWeight.SemiBold)
                 Text(
-                    text = if(isOnline) "Online" else "Offline",
+                    text = if (isOnline) "Online" else "Offline",
                     fontSize = 12.sp
                 )
             }
@@ -106,14 +110,14 @@ fun MessageItem(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = if(isOut) Alignment.End else Alignment.Start
+        horizontalAlignment = if (isOut) Alignment.End else Alignment.Start
     ) {
         if (messageText != null) {
             if (messageText.isNotEmpty()) {
                 Box(
                     modifier = Modifier
                         .background(
-                            if (isOut) MaterialTheme.colors.primary else Color(0xFF616161),
+                            if (isOut) MaterialTheme.colorScheme.primary else Color(0xFF616161),
                             shape = if (isOut) AuthorChatBubbleShape else BotChatBubbleShape
                         )
                         .padding(
