@@ -17,23 +17,23 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SettingsScreen() {
-    Surface( modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+    Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         Column(modifier = Modifier.fillMaxSize()) {
             Row() {
-                IconButton(onClick = { /*TODO*/ }){
+                IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         imageVector = Icons.Filled.AccountCircle,
                         contentDescription = null
                     )
                 }
             }
-            Column(horizontalAlignment = Alignment.CenterHorizontally,) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
                     contentDescription = null
                 )
             }
-            Column(horizontalAlignment = Alignment.CenterHorizontally,) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
                     contentDescription = null
@@ -42,7 +42,8 @@ fun SettingsScreen() {
         }
     }
 }
-@Preview(showBackground = true,widthDp = 320, heightDp = 480)
+
+@Preview(showBackground = true, widthDp = 320, heightDp = 480)
 @Composable
 private fun PreviewSettingsScreen() {
     SettingsScreen()

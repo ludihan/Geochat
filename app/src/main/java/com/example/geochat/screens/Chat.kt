@@ -1,10 +1,7 @@
 package com.example.geochat.screens
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -24,7 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,10 +42,6 @@ class Chat : ComponentActivity() {
 
 @Composable
 fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
-    val context = LocalContext.current
-//    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//    val activeNetwork = connectivityManager.activeNetworkInfo
-//    viewModel.changeConnectivityState(activeNetwork != null && activeNetwork.isConnected)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -69,7 +61,6 @@ fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
 fun MessageSection(
     viewModel: ChatViewModel
 ) {
-    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth(),
