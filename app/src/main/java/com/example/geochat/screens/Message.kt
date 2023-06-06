@@ -9,10 +9,15 @@ data class Message(
     var isOut: Boolean = false
 )
 
+data class GeochatButton(
+    val title: String,
+    val payload: String
+)
+
 val message_dummy = listOf(
     Message(
         text = "Que bom!",
-        recipient_id = "Fake",
+        recipient_id = "bot",
         isOut = false
     ),
     Message(
@@ -22,7 +27,7 @@ val message_dummy = listOf(
     ),
     Message(
         text = "Olá, como vai você?",
-        recipient_id = "Fake",
+        recipient_id = "bot",
         isOut = false
     ),
     Message(

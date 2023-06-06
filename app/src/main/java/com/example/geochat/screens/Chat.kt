@@ -1,7 +1,10 @@
 package com.example.geochat.screens
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -25,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.geochat.ChatViewModel
 import com.example.geochat.R
 import com.example.geochat.ui.theme.GeochatTheme
 
@@ -41,14 +45,11 @@ class Chat : ComponentActivity() {
 }
 
 @Composable
-fun ChatScreen() {
-    /*Image(
-        modifier = Modifier.size(850.dp),
-        contentScale = ContentScale.FillBounds,
-        painter = painterResource(id = R.drawable.image,),
-        contentDescription = null
-    )*/
+fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
     val context = LocalContext.current
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetwork = connectivityManager.activeNetworkInfo
+    viewModel.changeConnectivityState(activeNetwork != null && activeNetwork.isConnected)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -58,14 +59,16 @@ fun ChatScreen() {
             profile = painterResource(id = R.drawable.user),
             isOnline = true
         )
-        ChatSection(Modifier.weight(1f))
-        MessageSection()
+        ChatSection(Modifier.weight(1f), viewModel)
+        MessageSection(viewModel)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MessageSection() {
+fun MessageSection(
+    viewModel: ChatViewModel
+) {
     val context = LocalContext.current
     Card(
         modifier = Modifier
@@ -92,7 +95,19 @@ fun MessageSection() {
 
                     modifier = Modifier
                         .size(30.dp)
-                        .clickable {}
+                        .clickable {
+                            if (viewModel._connectivityState.value){
+                                viewModel.sendMessage(
+                                    Message(
+                                        text = message.value,
+                                        recipient_id = viewModel.username,
+                                        isOut = true
+                                    )
+                                )
+                            } else {
+                                Toast.makeText(context, "Por favor cheque sua conexão.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 )
             },
             modifier = Modifier
@@ -100,6 +115,16 @@ fun MessageSection() {
                 .padding(10.dp)
         )
     }
+}
+
+fun generateAutoResponse(userInput: String): String {
+    val response = when (userInput) {
+        "Olá" -> "Olá, tudo bem?"
+        "Como vai?" -> "Estou bem, obrigado!"
+        "Qual é o seu nome?" -> "Eu sou o ChatBot."
+        else -> "Desculpe, não entendi."
+    }
+    return response
 }
 
 @Preview(showBackground = true)
