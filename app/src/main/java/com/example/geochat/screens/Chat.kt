@@ -47,9 +47,9 @@ class Chat : ComponentActivity() {
 @Composable
 fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
     val context = LocalContext.current
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val activeNetwork = connectivityManager.activeNetworkInfo
-    viewModel.changeConnectivityState(activeNetwork != null && activeNetwork.isConnected)
+//    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//    val activeNetwork = connectivityManager.activeNetworkInfo
+//    viewModel.changeConnectivityState(activeNetwork != null && activeNetwork.isConnected)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -96,17 +96,14 @@ fun MessageSection(
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
-                            if (viewModel._connectivityState.value){
-                                viewModel.sendMessage(
-                                    Message(
-                                        text = message.value,
-                                        recipient_id = viewModel.username,
-                                        isOut = true
-                                    )
+                            viewModel.sendMessage(
+                                Message(
+                                    text = message.value,
+                                    recipient_id = viewModel.username,
+                                    isOut = true
                                 )
-                            } else {
-                                Toast.makeText(context, "Por favor cheque sua conexão.", Toast.LENGTH_SHORT).show()
-                            }
+                            )
+                            message.value = ""
                         }
                 )
             },
@@ -115,16 +112,6 @@ fun MessageSection(
                 .padding(10.dp)
         )
     }
-}
-
-fun generateAutoResponse(userInput: String): String {
-    val response = when (userInput) {
-        "Olá" -> "Olá, tudo bem?"
-        "Como vai?" -> "Estou bem, obrigado!"
-        "Qual é o seu nome?" -> "Eu sou o ChatBot."
-        else -> "Desculpe, não entendi."
-    }
-    return response
 }
 
 @Preview(showBackground = true)
