@@ -6,10 +6,6 @@
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
 
-    <!--Colocado pra tentar chat
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />-->
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,13 +13,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustResize"
         android:theme="@style/Theme.Geochat"
+        android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="chave" />
-
+            android:value="${MAPS_API_KEY}" />
         <activity
             android:name=".MainScreen"
             android:exported="false"
@@ -39,23 +35,6 @@
             android:exported="false"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/Theme.Geochat" />
-        <!--
-        <activity
-            android:name=".BottomBarScreen"
-            android:exported="false"
-            android:label="@string/title_activity_main_nav_bar"
-            android:theme="@style/Theme.Geochat" />
-        <activity
-            android:name=".ChatMenu"
-            android:exported="false"
-            android:label="@string/title_activity_chat_menu"
-            android:theme="@style/Theme.Geochat" />
-        <activity
-            android:name=".screens.Settings"
-            android:exported="false"
-            android:label="@string/title_activity_config_menu"
-            android:theme="@style/Theme.Geochat" />
-            -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

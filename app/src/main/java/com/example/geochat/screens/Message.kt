@@ -1,6 +1,7 @@
 package com.example.geochat.screens
 
 import java.util.Calendar
+import kotlin.random.Random
 
 data class Message(
     var text: String? = null,
@@ -9,30 +10,26 @@ data class Message(
     var isOut: Boolean = false
 )
 
-data class GeochatButton(
-    val title: String,
-    val payload: String
-)
+var random = Random.nextInt(2)
 
 val message_dummy = listOf(
-    Message(
-        text = "Que bom!",
-        recipient_id = "bot",
-        isOut = false
-    ),
-    Message(
-        text = "Estou bem.",
-        recipient_id = "user",
-        isOut = true
-    ),
-    Message(
-        text = "Olá, como vai você?",
-        recipient_id = "bot",
-        isOut = false
-    ),
-    Message(
-        text = "Oi! Bom dia.",
-        recipient_id = "user",
-        isOut = true
-    )
+    if (random == 0) {
+        Message(
+            text = "Oie!",
+            recipient_id = "bot",
+            isOut = false
+        )
+    } else if (random == 1) {
+        Message(
+            text = "E aí, beleza!?",
+            recipient_id = "bot",
+            isOut = false
+        )
+    } else {
+        Message(
+            text = "Opa, mais alguém usando o Geochat",
+            recipient_id = "bot",
+            isOut = false
+        )
+    }
 )

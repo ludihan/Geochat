@@ -22,41 +22,23 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun MapScreen() {
-
-    val brazil = LatLng(-3.74, -38.4)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(brazil, 10f)
+        position = CameraPosition.fromLatLngZoom(LatLng(-3.7693680643443406, -38.480132266016994), 18f)
     }
-    GoogleMap(
-        modifier = Modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState
-    ) {
-        Marker(
-            state = MarkerState(position = brazil),
-            title = "Singapore",
-            snippet = "Marker in Singapore"
-        )
-    }
-
-    var uiSettings by remember { mutableStateOf(MapUiSettings()) }
     var properties by remember {
         mutableStateOf(MapProperties(mapType = MapType.SATELLITE))
     }
-
-    Box(Modifier.fillMaxSize()) {
-        GoogleMap(
-            modifier = Modifier.matchParentSize(),
-            properties = properties,
-            uiSettings = uiSettings
-        )
-        Switch(
-            checked = uiSettings.zoomControlsEnabled,
-            onCheckedChange = {
-                uiSettings = uiSettings.copy(zoomControlsEnabled = it)
-            }
+    GoogleMap(
+        modifier = Modifier.fillMaxSize(),
+        properties = properties,
+        cameraPositionState = cameraPositionState
+    ) {
+        Marker(
+            state = MarkerState(LatLng(-3.7693680643443406, -38.480132266016994)),
+            title = "Brasil",
+            snippet = "Brasil MARCADO"
         )
     }
-
 }
 
 @Preview
