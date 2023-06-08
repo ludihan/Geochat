@@ -1,6 +1,8 @@
 package com.example.geochat
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,8 +16,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,9 +28,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.geochat.screens.ChatScreen
 import com.example.geochat.screens.MapScreen
+import com.example.geochat.screens.Message
 import com.example.geochat.screens.SettingsScreen
 import com.example.geochat.ui.theme.GeochatTheme
 import com.example.geochat.utils.Constants
+import kotlin.random.Random
+
+private const val SCREEN_STATE_KEY = "screen_state_key"
 
 class MainScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +75,6 @@ fun NavHostContainer(
     navController: NavHostController,
     padding: PaddingValues
 ) {
-
     NavHost(
         navController = navController,
 
@@ -98,7 +106,6 @@ fun NavHostContainer(
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
-
     NavigationBar(
 
         // set background color

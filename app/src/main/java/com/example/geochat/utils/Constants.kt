@@ -3,14 +3,15 @@ package com.example.geochat.utils
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import com.example.geochat.models.BottomNavItem
 
 object Constants {
     val BottomNavItems = listOf(
         BottomNavItem(
-            label = "Chat",
-            icon = Icons.Filled.Email,
+            label = "Buscar",
+            icon = Icons.Filled.Search,
             route = "chat"
         ),
         BottomNavItem(

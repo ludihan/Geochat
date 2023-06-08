@@ -6,4 +6,26 @@
     <string name="title_activity_main_nav_bar">MainNavBar</string>
     <string name="title_activity_bottom_nav_graph">com.example.geochat.BottomNavGraph</string>
     <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string-array name="nome">
+        <item>Alê</item>
+        <item>Rê</item>
+        <item>Dani</item>
+        <item>Andy</item>
+        <item>Rô</item>
+        <item>Sam</item>
+        <item>Cris</item>
+    </string-array>
+    <string-array name="sobrenome">
+        <item>Martins</item>
+        <item>Rodrigues</item>
+        <item>Oliveira</item>
+        <item>Costa</item>
+        <item>Pereira</item>
+        <item>Alves</item>
+        <item>Santos</item>
+        <item>Ribeiro</item>
+    </string-array>
+
+
 </resources>

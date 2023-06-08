@@ -41,6 +41,8 @@ import androidx.compose.ui.unit.sp
 import com.example.geochat.ui.theme.GeochatTheme
 import com.example.geochat.ui.theme.Gray
 import com.example.geochat.ui.theme.GrayButtonColors
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,27 +76,6 @@ fun LoginButton(
     }
 }
 
-/*
-@Composable
-fun CredentialsTextField(
-    textLabel: String,
-    textValue: String,
-) {
-    Column() {
-        TextField(value = textValue, shape = RectangleShape, onValueChange = {
-            textValue = it
-        }, label = {
-            Text(text = textLabel)
-        }, colors = TextFieldDefaults.textFieldColors(
-            containerColor = Gray
-        )
-        )
-    }
-}
-
-
- */
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App() {
@@ -124,23 +105,33 @@ private fun App() {
 
             //Coluna Usuário e Senha
             Column {
-                TextField(value = nome, shape = RectangleShape, singleLine = true, onValueChange = { newText ->
-                    nome = newText
-                }, label = {
-                    Text(text = "Nome", color = MaterialTheme.colorScheme.background)
-                }, colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color.Black,
-                    containerColor = Gray
+                TextField(value = nome,
+                    shape = RectangleShape,
+                    singleLine = true,
+                    onValueChange = { newText ->
+                        nome = newText
+                    },
+                    label = {
+                        Text(text = "Nome", color = MaterialTheme.colorScheme.background)
+                    },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Black,
+                        containerColor = Gray
+                    )
                 )
-                )
-                TextField(value = senha, shape = RectangleShape, singleLine = true, onValueChange = { newText ->
-                    senha = newText
-                }, label = {
-                    Text(text = "Senha", color = MaterialTheme.colorScheme.background)
-                }, colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color.Black,
-                    containerColor = Gray
-                )
+                TextField(value = senha,
+                    shape = RectangleShape,
+                    singleLine = true,
+                    onValueChange = { newText ->
+                        senha = newText
+                    },
+                    label = {
+                        Text(text = "Senha", color = MaterialTheme.colorScheme.background)
+                    },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Black,
+                        containerColor = Gray
+                    )
                 )
             }
 

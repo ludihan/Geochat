@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.geochat.ChatViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -83,6 +84,7 @@ fun TopBarSection(
 @Composable
 fun ChatSection(
     modifier: Modifier = Modifier,
+    viewModel: ChatViewModel
 ) {
     val simpleDateFormat = SimpleDateFormat("h:mm a", Locale.ENGLISH)
     LazyColumn(
@@ -91,11 +93,11 @@ fun ChatSection(
             .padding(16.dp),
         reverseLayout = true
     ) {
-        items(message_dummy) { chat ->
+        items(viewModel.messages) { chat ->
             MessageItem(
                 messageText = chat.text,
                 time = simpleDateFormat.format(chat.time),
-                isOut = chat.isOut,
+                isOut = chat.isOut
             )
             Spacer(modifier = Modifier.height(8.dp))
         }

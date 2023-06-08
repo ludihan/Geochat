@@ -2,6 +2,7 @@ package com.example.geochat.screens
 
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -23,10 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.geochat.ChatViewModel
 import com.example.geochat.R
 import com.example.geochat.ui.theme.GeochatTheme
+import kotlin.random.Random
 
 class Chat : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,32 +45,32 @@ class Chat : ComponentActivity() {
 }
 
 @Composable
-fun ChatScreen() {
-    /*Image(
-        modifier = Modifier.size(850.dp),
-        contentScale = ContentScale.FillBounds,
-        painter = painterResource(id = R.drawable.image,),
-        contentDescription = null
-    )*/
-    val context = LocalContext.current
+fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
+    var context = LocalContext.current
+    Toast.makeText(context,"Novo usuário encontrado!", Toast.LENGTH_LONG).show()
+    val nome = stringArrayResource(R.array.nome)
+    val snome = stringArrayResource(R.array.sobrenome)
+    var randomn = Random.nextInt(6)
+    var randoms = Random.nextInt(6)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TopBarSection(
-            username = "Fake",
+            username = nome[randomn] + " " + snome[randoms],
             profile = painterResource(id = R.drawable.user),
             isOnline = true
         )
-        ChatSection(Modifier.weight(1f))
-        MessageSection()
+        ChatSection(Modifier.weight(1f), viewModel)
+        MessageSection(viewModel)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MessageSection() {
-    val context = LocalContext.current
+fun MessageSection(
+    viewModel: ChatViewModel
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -92,7 +96,16 @@ fun MessageSection() {
 
                     modifier = Modifier
                         .size(30.dp)
-                        .clickable {}
+                        .clickable {
+                            viewModel.sendMessage(
+                                Message(
+                                    text = message.value,
+                                    recipient_id = viewModel.username,
+                                    isOut = true
+                                )
+                            )
+                            message.value = ""
+                        }
                 )
             },
             modifier = Modifier
