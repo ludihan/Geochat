@@ -22,11 +22,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.geochat.ChatViewModel
 import com.example.geochat.R
 import com.example.geochat.ui.theme.GeochatTheme
+import kotlin.random.Random
 
 class Chat : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +44,16 @@ class Chat : ComponentActivity() {
 
 @Composable
 fun ChatScreen(viewModel: ChatViewModel = ChatViewModel()) {
+    val nome = stringArrayResource(R.array.nome)
+    val snome = stringArrayResource(R.array.sobrenome)
+    val randomn = Random.nextInt(6)
+    val randoms = Random.nextInt(6)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TopBarSection(
-            username = "Fake",
+            username = nome[randomn] + " " + snome[randoms],
             profile = painterResource(id = R.drawable.user),
             isOnline = true
         )
