@@ -41,8 +41,6 @@ import androidx.compose.ui.unit.sp
 import com.example.geochat.ui.theme.GeochatTheme
 import com.example.geochat.ui.theme.Gray
 import com.example.geochat.ui.theme.GrayButtonColors
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
